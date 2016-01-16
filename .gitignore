@@ -30,3 +30,4 @@
 #others
 *~
 *.xcodeproj
+.idea
