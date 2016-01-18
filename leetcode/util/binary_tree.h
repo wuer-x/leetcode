@@ -1,15 +1,27 @@
 //
 // Created by 宋腾 on 16/1/18.
 //
-#include <stddef.h>
-#include <iostream>
-#include "../util/binary_tree.h"
+
+#ifndef LEETCODE_BINARY_TREE_H
+#define LEETCODE_BINARY_TREE_H
 
 using namespace std;
 
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
 
-class Solution {
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {
+    }
+};
+
+class binary_tree {
 public:
+    void build_binary_tree(){
+        
+    }
+
     int maxDepth(TreeNode *root) {
         if (root == NULL) {
             return 0;
@@ -21,16 +33,4 @@ public:
 };
 
 
-int main() {
-    TreeNode left(19);
-    TreeNode right(22);
-    TreeNode root(21);
-    root.left = &left;
-    root.right = &right;
-    binary_tree s;
-    cout<<s.maxDepth(&root)<<endl;
-
-
-    return 0;
-
-}
+#endif //LEETCODE_BINARY_TREE_H
