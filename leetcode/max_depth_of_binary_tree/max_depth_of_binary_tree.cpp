@@ -3,6 +3,7 @@
 //
 #include <stddef.h>
 #include <iostream>
+#include <string>
 #include "../util/binary_tree.h"
 
 using namespace std;
@@ -28,7 +29,13 @@ int main() {
     root.left = &left;
     root.right = &right;
     binary_tree s;
-    cout<<s.maxDepth(&root)<<endl;
+    s.BreadthFirstSearch(&root);
+    s.InvertBinaryTree(&root);
+    s.BreadthFirstSearch(&root);
+//    cout<<s.MaxDepth(&root)<<endl;
+
+
+
 
 
     return 0;
