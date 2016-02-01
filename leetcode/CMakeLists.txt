@@ -4,5 +4,5 @@ project(leetcode)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 
-set(SOURCE_FILES max_depth_of_binary_tree/max_depth_of_binary_tree.cpp delete_node_in_a_linked_list.cpp invert_binary_tree/insert_binary_tree.cpp)
+set(SOURCE_FILES 100_same_tree/100_same_tree.cpp)
 add_executable(leetcode ${SOURCE_FILES})
