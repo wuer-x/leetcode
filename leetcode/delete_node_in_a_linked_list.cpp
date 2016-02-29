@@ -1,3 +1,6 @@
+# define PI 3.15
+
+
 #include <stddef.h>
 #include <iostream>
 
@@ -25,3 +28,9 @@ public:
 
     }
 };
+
+int main(){
+    cout<<to_string(PI)<<endl;
+    
+    return 0;
+}

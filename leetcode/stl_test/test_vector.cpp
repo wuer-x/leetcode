@@ -5,15 +5,23 @@
 #include <vector>
 #include <iostream>
 #include <iterator>
+#include <queue>
 
 using namespace std;
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
 
 int main(){
-    int i;
-    vector<int> iv(2,9);
+//    TreeNode * root = new TreeNode(0);
+    queue<int> v;
 
-    vector<int>::iterator iter = ;
-
+    cout<<to_string(v.size())<<endl;
+    return 0;
 
 }
 
