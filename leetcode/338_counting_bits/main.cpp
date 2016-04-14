@@ -4,6 +4,14 @@
 using namespace std;
 
 class Solution {
+private:
+    void output_vector(vector<int> num){
+        int size = num.size();
+        for(int i = 0 ; i < size;i++){
+            cout<<num[i]<<" ";
+        }
+        cout<<endl;
+    }
 public:
     vector<int> countBits(int num) {
 
@@ -20,8 +28,9 @@ public:
             for(int j = 1; update_index <= num;){
 
                 if(rst[update_index] == 0){
-                    printf("update_index is: %d\n",update_index);
-                    rst[update_index] = rst[i] + j;
+                    printf("update_index is: %d and i is:%d and j is: %d\n",update_index,i,j);
+                    rst[update_index] = rst[i] + 1;
+                    output_vector(rst);
                 }
                 update_index = pow(2,++j)+i;
                     }
@@ -35,7 +44,7 @@ int main(){
     vector<int> nums ;
 
     Solution * s =  new Solution();
-    nums = s->countBits(3);
+    nums = s->countBits(4);
     for(int i  = 0 ; i< nums.size() ;i++){
         cout<<nums[i]<<" ";
     }
