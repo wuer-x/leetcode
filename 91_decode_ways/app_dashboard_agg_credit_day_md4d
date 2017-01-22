@@ -1,0 +1,40 @@
+
+
+        use app;
+        insert overwrite table app_dashboard_agg_credit_day_md partition(dateType='d',rowkeyType='4',dt='2016-04-18')  
+
+
+SELECT d.rowKey,
+       cast(d.avg_amount_payable as bigint),
+       cast(d.avg_stock_amount as bigint),
+       round(d.payable_turnover_ratio ,2) ,
+       round(d.inventory_turnover_ratio, 2),
+       ROUND(d.payable_turnover_ratio-d.inventory_turnover_ratio, 2) AS credit_days
+FROM
+  (SELECT concat('ds_',c.dept_id_3,'_d_','2016-04-18','_',c.saler_erp_acct) AS rowKey,
+          sum(c.payable_amount_d) AS avg_amount_payable,
+          sum(stock_amount_s) / date_diff AS avg_stock_amount,
+          if(sum(cost)>0,sum(payable_amount_d) / 2 * date_diff /sum(cost),0) AS payable_turnover_ratio,
+          if(sum(cost)>0,sum(stock_amount_s) /sum(cost),0) AS inventory_turnover_ratio
+   FROM
+     (SELECT a.item_sku_id,
+             a.cost_norebateamount_s AS cost,
+             a.payable_amount_d,
+             a.payable_amount_s,
+             a.stock_amount_s,
+             a.date_diff_int AS date_diff,
+             b.dept_id_3,
+             b.saler_erp_acct
+      FROM
+        (SELECT *
+         FROM app.app_dashboard_sku_credit_day_md
+         WHERE TYPE='d'
+           AND dt = '2016-04-18') a
+      INNER JOIN
+        (SELECT *
+         FROM app.app_dashboard_sku_info
+         WHERE dt='2016-04-18') b ON a.item_sku_id = b.item_sku_id)c
+   GROUP BY c.dept_id_3,
+            c.saler_erp_acct,
+            c.date_diff)d ;
+
