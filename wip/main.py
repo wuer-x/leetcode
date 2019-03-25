@@ -12,30 +12,22 @@ class Solution(object):
         """
         a = [-1] * n  # cur solution
         solutions = []  # all solutions
+
         def _valid(cur_r, cur_c, a):
 
             # same columns
             for i in range(cur_r):
-                if (a[i] == cur_c or abs(i - cur_r) == abs(a[i] - cur_c)):
+                if a[i] == cur_c or abs(i - cur_r) == abs(a[i] - cur_c):
                     return False
-                # if a[i] == cur_c:  #same columns
-                #     return False
-                # if a[cur_r - i] == cur_c - i:
-                #     return False
-                # if a[cur_r - i] == cur_c + i:
-                #     return False
             return True
 
         cur_r, cur_c = 0, 0
-        while (cur_r < n):
-            while (cur_c < n):
-                print(cur_r, cur_c)
+        while cur_r < n:
+            while cur_c < n:
                 if _valid(cur_r, cur_c, a):  # if cur_r, cur_c without confilcts
                     a[cur_r] = cur_c
                     cur_c = 0
-                    print(a)
                     break
-
                 else:  # bt
                     cur_c += 1
             if a[cur_r] == -1:  # if fail when hit the boundary
@@ -43,17 +35,20 @@ class Solution(object):
                     cur_r -= 1
                     cur_c = a[cur_r] + 1
                     a[cur_r] = -1
+                    continue # this line
                 else:
                     print('FAILED')
-                    return
-            else:
-                cur_r += 1
-
-        if cur_r == n - 1:  # get an solution
-            print(a)
-            # solutions.append(a)
+                    break
+            if cur_r == n - 1:  # get an solution
+                solutions.append(a)
+                cur_c = a[cur_r] + 1
+                a[cur_r] = -1
+                continue
+            cur_r += 1
+        return solutions
 
 
 if __name__ == '__main__':
     s = Solution()
-    s.solveNQueens(4)
+    rst = s.solveNQueens(8)
+    print(len(rst))
